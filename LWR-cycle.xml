@@ -41,12 +41,10 @@
 
         <fill_commods>
           <val>PWR_Upu_stored</val>
-          <val>PWR_Upu_initial_stored</val>
         </fill_commods>
 
         <fill_recipe>PWR_Upu</fill_recipe>
        <fill_commod_prefs>
-          <val>2.0</val>
           <val>1.0</val>
         </fill_commod_prefs>
 
@@ -174,7 +172,10 @@
   <name>PWR_storage_Upu</name>
   <config>
     <Storage>
-      <in_commods> <val>PWR_Upu</val></in_commods>
+      <in_commods>
+        <val>PWR_Upu</val>
+        <val>PWR_Upu_initial_stored</val>
+      </in_commods>
       <out_commods> <val>PWR_Upu_stored</val></out_commods>
       <residence_time>0</residence_time>
     </Storage>
