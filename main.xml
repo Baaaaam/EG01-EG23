@@ -16,33 +16,32 @@
     <spec> <lib>cycamore</lib> <name>Reactor</name> </spec>
     <spec> <lib>cycamore</lib> <name>Storage</name> </spec>
     <spec> <lib>cycamore</lib> <name>FuelFab</name> </spec>
+    <spec> <lib>cycamore</lib> <name>MixingFab</name> </spec>
     <spec> <lib>cycamore</lib> <name>Separations</name> </spec>
   </archetypes>
+  <recipe>
+    <name>FBR_driver_upu_E1</name>
+    <basis>mass</basis>
+    <nuclide> <id>U238</id>  <comp>0.883885</comp> </nuclide>
+    <nuclide> <id>PU239</id> <comp>0.116115</comp> </nuclide>
+  </recipe>
+  <!-- *********************** -->
   
-  
-  <xi:include href="recipe.xml" xpointer="xpointer(//My_include/*)"/>
-  <xi:include href="SFR-cycle.xml" xpointer="xpointer(//My_include/*)"/>
-  <!--        <xi:include href="LWR-cycle.xml" xpointer="xpointer(//My_include/*)"/> -->
-  
-  <prototype>
-    <name>natl_u_source</name>
-    <config>
-      <Source>
-        <outcommod>natl_u</outcommod>
-        <outrecipe>natl_u</outrecipe>
-        
-        <inventory_size>1e100</inventory_size>
-        <throughput>1e100</throughput>
-      </Source>
-    </config>
-  </prototype>
-  
+  <!-- upu E2 recipe -->
+  <recipe>
+    <name>FBR_blanket_upu_E2</name>
+    <basis>mass</basis>
+    <nuclide> <id>U238</id>  <comp>0.9167665</comp> </nuclide>
+    <nuclide> <id>PU239</id> <comp>0.0832335</comp> </nuclide>
+  </recipe>
+
+
   
   <prototype>
-    <name>blanket_Upu_limited_E2_source</name>
+    <name>Source_Stream1</name>
     <config>
       <Source>
-        <outcommod>FBR_blanket_upu_E2_initial</outcommod>
+        <outcommod>Stream1</outcommod>
         <outrecipe>FBR_blanket_upu_E2</outrecipe>
         
         <inventory_size>1000000</inventory_size>
@@ -52,10 +51,10 @@
   </prototype>
   
   <prototype>
-    <name>FBR_Upu_limited_E1_source</name>
+    <name>Source_Stream2</name>
     <config>
       <Source>
-        <outcommod>FBR_driver_upu_E1_initial</outcommod>
+        <outcommod>Stream2</outcommod>
         <outrecipe>FBR_driver_upu_E1</outrecipe>
         
         <inventory_size>1000000</inventory_size>
@@ -64,16 +63,46 @@
     </config>
   </prototype>
   
+  
   <prototype>
-    <name>FBR_blanket_u_limited_RU_source</name>
+    <name>Mixing_Fab</name>
     <config>
-      <Source>
-        <outcommod>FBR_blanket_u_RU_initial</outcommod>
-        <outrecipe>FBR_blanket_u_RU</outrecipe>
+      <MixingFab>
         
-        <inventory_size>1000000</inventory_size>
-        <throughput>1e100</throughput>
-      </Source>
+        <in_commods>
+          <val>Stream1</val>
+          <val>Stream2</val>
+        </in_commods>
+        
+        <commods_size>
+          <val>100000</val>
+          <val>100000</val>
+        </commods_size>
+        
+        <commods_frac>
+          <val>0.141146</val>
+          <val>0.858854</val>
+        </commods_frac>
+        
+        
+        <throughput>1000000</throughput>
+        
+        <outcommod>MIX</outcommod>
+        <outputbuf_size>10000000</outputbuf_size>
+        
+      </MixingFab>
+    </config>
+  </prototype>
+  
+  <!--       FBR blanket Storage       -->
+  <prototype>
+    <name>Mix_storage</name>
+    <config>
+      <Storage>
+        <in_commods> <val>MIX</val></in_commods>
+        <out_commods> <val>MIX_Stored</val></out_commods>
+        <residence_time>0</residence_time>
+      </Storage>
     </config>
   </prototype>
   
@@ -88,89 +117,29 @@
   </prototype>
   
   <prototype>
-    <name>deployer_FBR_CHAIN</name>
+    <name>deployer</name>
     <config>
       <DeployInst>
         <prototypes>
-          <val>waste</val>
           
-          <val>natl_u_source</val>
-          <val>blanket_Upu_limited_E2_source</val>
-          <val>FBR_Upu_limited_E1_source</val>
-          <val>FBR_blanket_u_limited_RU_source</val>
+          <val>Source_Stream1</val>
+          <val>Source_Stream2</val>
           
+          <val>Mixing_Fab</val>
+          <val>Mix_storage</val>
           
-          <val>FBR_driver_upu_repro_mix_fabrication</val>
-          
-          
-          <val>FBR_blanket_fabrication</val>
-          <val>FBR_driver_MOX_cooling</val>
-          <val>FBR_driver_MOX_storage</val>
-          <val>FBR_driver_separation</val>
-          <val>FBR_fabrication</val>
-          
-          <!--
-           
-           
-           
-           -->
-          <val>FBR_driver_storage_upu_E1</val>
-          
-          <val>FBR_blanket_cooling</val>
-          <val>FBR_blanket_storage</val>
-          <val>FBR_blanket_separation</val>
-          <val>FBR_blanket_storage_E2</val>
-          <val>FBR_blanket_storage_E3</val>
-          <val>FBR_blanket_storage_RU</val>
-          <!--
-           
-           -->
-          
-          <val>FBR_driver</val>
-          <val>FBR_blanket</val>
+
         </prototypes>
         
         <build_times>
           <val>1</val>
           <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
+           <val>1</val>
           <val>1</val>
           
-          <val>1</val>
-          <val>1</val>
         </build_times>
         
         <n_build>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
-          <val>1</val>
           <val>1</val>
           <val>1</val>
           <val>1</val>
@@ -181,7 +150,7 @@
   </prototype>
   
   
-  <agent> <name>deployer</name> <prototype>deployer_FBR_CHAIN</prototype> </agent>
+  <agent> <name>deployer</name> <prototype>deployer</prototype> </agent>
   
   
   

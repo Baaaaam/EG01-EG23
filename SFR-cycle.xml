@@ -37,35 +37,50 @@
   
   <!--      FBR fabrication      -->
   <prototype>
-    <name>FBR_driver_upu_repro_mix_fabrication</name>
+    <name>Mixing_Fab</name>
     <config>
-      <FuelFab>
+      <MixingFab>
         
-        <fill_commods>
+        <in_commods>
           <val>FBR_blanket_upu_E2_stored</val>
-        </fill_commods>
-        
-        <fill_recipe>FBR_blanket_upu_E2</fill_recipe>
-        <fill_size>100000</fill_size>
-        
-        <fiss_commods>
           <val>FBR_driver_pu_E1_stored</val>
-        </fiss_commods>
+        </in_commods>
         
-        <fiss_commod_prefs>
-          <val>1.0</val>
-        </fiss_commod_prefs>
-        
-        <fiss_size>100000</fiss_size>
-        
+        <commods_size>
+          <val>100000</val>
+          <val>100000</val>
+        </commods_size>
+
+        <commods_frac>
+          <val>0.141146</val>
+          <val>0.858854</val>
+        </commods_frac>
+
+
         <throughput>1000000</throughput>
-        <spectrum>fission_spectrum_ave</spectrum>
-        <outcommod>FBR_driver_MOX_new</outcommod>
         
-      </FuelFab>
+        <outcommod>MIX</outcommod>
+        <outputbuf_size>10000000</outputbuf_size>
+        
+      </MixingFab>
     </config>
   </prototype>
   
+  <!--       FBR blanket Storage       -->
+  <prototype>
+    <name>Mix_storage</name>
+    <config>
+      <Storage>
+        <in_commods> <val>MIX</val></in_commods>
+        <out_commods> <val>MIX_Stored</val></out_commods>
+        <residence_time>0</residence_time>
+      </Storage>
+    </config>
+  </prototype>
+  
+  
+  
+  <!-- *********************** -->
   <prototype>
     <name>FBR_fabrication</name>
     <config>
@@ -79,7 +94,7 @@
         <fill_size>100000</fill_size>
         
         <fiss_commods>
-          <val>upu_repro_mix</val>
+          <val>FBR_driver_MOX_new</val>
         </fiss_commods>
         
         <fiss_commod_prefs>
@@ -307,7 +322,7 @@
               <buf_size>1e100</buf_size>
               <efficiencies>
                 <item> <comp>Pu</comp> <eff>0.388898</eff> </item>
-                <item> <comp>U</comp> <eff>.988</eff> </item>
+                <item> <comp>U</comp> <eff>0.1</eff> </item>
               </efficiencies>
             </info>
           </item>
@@ -317,7 +332,7 @@
               <buf_size>1e100</buf_size>
               <efficiencies>
                 <item> <comp>Pu</comp> <eff>0.590746</eff> </item>
-                <item> <comp>U</comp> <eff>.988</eff> </item>
+                <item> <comp>U</comp> <eff>0.1</eff> </item>
               </efficiencies>
             </info>
           </item>
@@ -326,7 +341,7 @@
             <info>
               <buf_size>1e100</buf_size>
               <efficiencies>
-                <item> <comp>U</comp> <eff>.988</eff> </item>
+                <item> <comp>U</comp> <eff>0.1</eff> </item>
               </efficiencies>
             </info>
           </item>
