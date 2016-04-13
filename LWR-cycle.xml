@@ -137,7 +137,29 @@
             </efficiencies>
           </info>
         </item>
-
+        
+        <item>
+          <commod>toto</commod>
+          <info>
+            <buf_size>1e100</buf_size>
+            <efficiencies>
+              <item> <comp>Pu</comp> <eff>.988</eff> </item>
+              <item> <comp>Am</comp> <eff>1.1</eff> </item>
+            </efficiencies>
+          </info>
+        </item>
+        
+        <item>
+          <commod>toto</commod>
+          <info>
+            <buf_size>1e100</buf_size>
+            <efficiencies>
+              <item> <comp>Pu</comp> <eff>.988</eff> </item>
+              <item> <comp>U</comp> <eff>.988</eff> </item>
+            </efficiencies>
+          </info>
+        </item>
+        
       </streams>
 
       <leftover_commod>waste</leftover_commod>
