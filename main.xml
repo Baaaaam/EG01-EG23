@@ -43,7 +43,7 @@
     <config>
       <Source>
 	<outcommod>J1_second_initial</outcommod>
-	<outrecipe>J1_second</outrecipe>
+	<outrecipe>J1</outrecipe>
 
 	<inventory_size>10000000000</inventory_size>
 	<throughput>1e100</throughput>
@@ -82,7 +82,7 @@
     <config>
       <Source>
         <outcommod>E3_second_initial</outcommod>
-        <outrecipe>E3_second</outrecipe>
+        <outrecipe>E3</outrecipe>
 
         <inventory_size>1000000000</inventory_size>
         <throughput>1e100</throughput>
