@@ -5,7 +5,7 @@
     <duration>1200</duration>
     <startmonth>1</startmonth>
     <startyear>2015</startyear>
-    <decay>lazy</decay>
+    <decay>never</decay>
   </control>
 
   <archetypes>
@@ -236,29 +236,29 @@
           <val>1</val>
           <val>1</val>
           <val>1</val>
-          <val>3</val>
+          <val>6</val>
 
-	  <val>3</val>
-          <val>3</val>
+	  <val>6</val>
+          <val>6</val>
 
 	  
 	  <val>1</val>
           <val>1</val>
           <val>1</val>
 
-	  <val>15</val>
+	  <val>35</val>
 
-	  <val>18</val>
-          <val>18</val>
+	  <val>35</val>
+          <val>35</val>
 
 	  <val>1</val>
           <val>1</val>
           <val>1</val>
 
-	  <val>15</val>
+	  <val>35</val>
 
-	  <val>18</val>
-          <val>18</val>
+	  <val>35</val>
+          <val>35</val>
         </n_build>
       </DeployInst>
     </config>
